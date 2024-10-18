@@ -25,6 +25,7 @@ st.set_page_config(
 # Set the title that appears at the top of the page.
 st.header('Difference-in-Differences Analysis Tool', divider='gray')
 
+
 st.caption('Tool based on :blue[Matheus Facure Alves Causal Inference for the brave and true handbook.] https://matheusfacure.github.io/python-causality-handbook/13-Difference-in-Differences.html')
 st.caption('This is useful if you can not run an A/B Test')
 st.caption('Made by :blue[Sterling]')
@@ -383,8 +384,6 @@ st.link_button("Streamlit / Snowflake Employee: Antoni Kędracki", "https://www.
 
 
 st.caption('Sterling @ 2024')
-
-
 
 
 
