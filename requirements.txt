@@ -1,6 +1,6 @@
 streamlit>=1.26.0
 pandas
 plotly>=5.22.0
-statsmodels
+statsmodels>=1.39.0
 numpy
 io
