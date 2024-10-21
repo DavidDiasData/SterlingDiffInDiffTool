@@ -193,9 +193,6 @@ with tab_sample_data:
 
 
 
-          sample_csv = dataframe = pd.read_csv("/workspaces/SterlingDiffInDiffTool/Causal inference - diff-in-diff - Raw Data - Example (Sterling example).csv")
-
-          data_as_csv= sample_csv.to_csv(index=False).encode("utf-8")
           
           st.markdown('**Learn how to use this app from sample data**')
           st.download_button(
