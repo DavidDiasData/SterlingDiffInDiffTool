@@ -33,9 +33,9 @@ tab_sample_data, tab_own_analysis, tab_guidance = st.tabs(["Sample Data", "Build
 
 with tab_sample_data:
      st.markdown('**Learn how to use this app from sample data**')
-     sample_csv = pd.read_csv("/workspaces/SterlingDiffInDiffTool/Causal inference - diff-in-diff - Raw Data - Example (Sterling example).csv")
+     dataframe = pd.read_csv("Causal inference - diff-in-diff - Raw Data - Example (Sterling example).csv")
 
-     data_as_csv= sample_csv.to_csv(index=False).encode("utf-8")
+     data_as_csv= dataframe.to_csv(index=False).encode("utf-8")
 
 
      st.download_button(
@@ -376,13 +376,6 @@ st.link_button("Streamlit / Snowflake Employee: Antoni Kędracki", "https://www.
 
 
 st.caption('Sterling @ 2024')
-
-
-
-
-
-
-
 
 
 
