@@ -173,13 +173,6 @@ with tab_sample_data:
                          st.write('We are 95 per cent confident that the true value of the intercept falls between ', str(table_results[4][5]), ' and ',  str(table_results[4][6]))
 
 
-
-
-
-
-
-
-
      with tab_own_analysis:
 
 
@@ -383,6 +376,5 @@ st.link_button("Streamlit / Snowflake Employee: Antoni Kędracki", "https://www.
 
 
 st.caption('Sterling @ 2024')
-
 
 
