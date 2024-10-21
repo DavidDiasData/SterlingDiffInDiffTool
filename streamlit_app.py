@@ -381,7 +381,3 @@ st.link_button("Streamlit / Snowflake Employee: Antoni Kędracki", "https://www.
 st.caption('Sterling @ 2024')
 
 
-
-
-
-
