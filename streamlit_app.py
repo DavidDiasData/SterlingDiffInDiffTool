@@ -192,6 +192,7 @@ with tab_sample_data:
 
 
 
+
           
           st.markdown('**Learn how to use this app from sample data**')
           st.download_button(
