@@ -33,7 +33,7 @@ tab_sample_data, tab_own_analysis, tab_guidance = st.tabs(["Sample Data", "Build
 
 with tab_sample_data:
      st.markdown('**Learn how to use this app from sample data**')
-     sample_csv = dataframe = pd.read_csv("/workspaces/SterlingDiffInDiffTool/Causal inference - diff-in-diff - Raw Data - Example (Sterling example).csv")
+     sample_csv = pd.read_csv("/workspaces/SterlingDiffInDiffTool/Causal inference - diff-in-diff - Raw Data - Example (Sterling example).csv")
 
      data_as_csv= sample_csv.to_csv(index=False).encode("utf-8")
 
@@ -74,10 +74,7 @@ with tab_sample_data:
           control_group_intervention_before_string = str(groups_name) + '==0' + ' & '  + str(intervention_date_name) + '==0'
           control_group_intervention_after_string = str(groups_name) + '==0' + ' & '  + str(intervention_date_name) + '==1'
      st.latex(r'''Y_dt  = β_0 + β_1 TREAT_d + β_2 POST_t + β_3 TREAT_d*POST_t + e_dt  ''')
-     
-     string_model = 'Y_dt  = β_0 + β_1 {{groups_name}}_d + β_2 {{intervention_date_name}}_t + β_3 {{groups_name}}_d*{{intervention_date_name}}_t + e_dt '
-     #st.latex(r'''Y_dt  = β_0 + β_1 TREAT_d + β_2 POST_t + β_3 TREAT_d*POST_t + e_dt  ''')
-     st.latex(string_model)
+
      st.write("You will run a lineal regression model based on the one above")
      st.caption("Treat variable: This will be your group column")
      st.caption("Post variable: This will be your intervention column")
@@ -379,5 +376,16 @@ st.link_button("Streamlit / Snowflake Employee: Antoni Kędracki", "https://www.
 
 
 st.caption('Sterling @ 2024')
+
+
+
+
+
+
+
+
+
+
+
 
 
