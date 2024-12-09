@@ -22,12 +22,12 @@ st.set_page_config(
 st.header('Difference-in-Differences Analysis Tool', divider='gray')
 
 st.caption('Tool based on :blue[Matheus Facure Alves Causal Inference for the brave and true handbook.] https://matheusfacure.github.io/python-causality-handbook/13-Difference-in-Differences.html')
-st.caption('This is useful if you can not run an A/B Test')
+st.caption('This tool is useful when you can not run an A/B Test.')
 st.caption('Made by :blue[Sterling]')
 #st.caption('This technique falls in the category of quasi-experiments.')
 
 
-tab_sample_data, tab_own_analysis, tab_guidance = st.tabs(["Sample Data", "Build Your Own Analysis", "Guidance / Glossary",])
+tab_sample_data, tab_own_analysis = st.tabs(["Sample Data", "Build Your Own Analysis"])
 
 
 
@@ -48,7 +48,6 @@ with tab_sample_data:
 
      col1, col2 = st.columns(2)
      with col1:
-          st.write("Take a look of the sample data")
           st.write(dataframe)
 
 
@@ -75,8 +74,8 @@ with tab_sample_data:
           control_group_intervention_after_string = str(groups_name) + '==0' + ' & '  + str(intervention_date_name) + '==1'
      st.latex(r'''Y_dt  = β_0 + β_1 TREAT_d + β_2 POST_t + β_3 TREAT_d*POST_t + e_dt  ''')
 
-     st.write("You will run a lineal regression model based on the one above")
-     st.caption("Treat variable: This will be your group column")
+     st.caption("You will run a lineal regression model based on the one above:")
+     st.caption("Treat variable: This will be your groups column")
      st.caption("Post variable: This will be your intervention column")
      st.caption("Treat*Post variable: This will be the combined effect of the group and intervention column")
      if st.button("Run the sample analysis", key='run_analysis_sample_data'):
@@ -94,14 +93,18 @@ with tab_sample_data:
                     control_group_intervention_before = dataframe.query(control_group_intervention_before_string)[metric_name].mean()
 
                     diff_in_diff = (target_group_after-target_group_before)-(control_group_intervention_after-control_group_intervention_before)
+                    sample_summary_data_table = {'event_data': ['before intervention', 'after intervention', 'variation (%)'],
+                                    'control_data': [control_group_intervention_before, control_group_intervention_after, ((control_group_intervention_after-control_group_intervention_before)/control_group_intervention_before)*100],
+                                        'target_data': [target_group_before, target_group_after, ((target_group_after-target_group_before)/target_group_before)*100],
+                                        'counterfactual_data': [target_group_before, target_group_before+(control_group_intervention_after-control_group_intervention_before), (((target_group_before+(control_group_intervention_after-control_group_intervention_before))-target_group_before) / target_group_before)*100]}
                     summary_data = {'event_data': ['before intervention', 'after intervention'],
+                                    'control_data': [control_group_intervention_before, control_group_intervention_after],
                                         'target_data': [target_group_before, target_group_after],
-                                        'control_data': [control_group_intervention_before, control_group_intervention_after],
                                         'counterfactual_data': [target_group_before, target_group_before+(control_group_intervention_after-control_group_intervention_before)]}
                     df_summary_data = pd.DataFrame(data=summary_data)
                     table_results = smf.ols(model_string, data=dataframe).fit().summary().tables[1]
 
-                    tab_actual_data_sample_data, tab_diff_data_sample_data, tab_regression_sample_data = st.tabs(["Actual Data", "Diff-in-Diff","Regression Model / Explanation"])
+                    tab_actual_data_sample_data, tab_diff_data_sample_data, tab_regression_sample_data = st.tabs(["Actual Data", "Diff-in-Diff Analysis","Regression Model / Explanation"])
 
                     with tab_actual_data_sample_data:
 
@@ -129,13 +132,13 @@ with tab_sample_data:
                ))
 
                          st.plotly_chart(fig, theme="streamlit")
-                         st.table(summary_data)
+                         st.table(sample_summary_data_table)
                          st.markdown('**Control group**')
                          st.caption("This is the group with no intervention at all, you will use it as for comparing with the target group which will receive the intervention / change planned.")
                          st.markdown('**Target group**')
                          st.caption("This is the group which will get the intervention / change planned, you will use it as for comparing with the control group and check how the metrics change over time.")
                          st.markdown('**Counterfactual group**')
-                         st.caption("This is the group similar to the target group in a scenario when the intervention doesn’t happen at all.")
+                         st.caption("This is a group similar to the target group in a scenario when the intervention doesn’t happen at all.")
 
 
                     with tab_regression_sample_data:
@@ -145,25 +148,25 @@ with tab_sample_data:
                          list_variables = list([str(table_results[1][0]), str(table_results[2][0]), str(table_results[3][0]), str(table_results[4][0])])
                          
                     
-                         st.write(str(table_results[1][0]), ': This is the value of your control group before the intervention. The base value is', str(table_results[1][1]), '. ')
-                         st.write('The standard error for the intercept is ', str(table_results[1][2]), ' which means the estimated value could vary by approximately ',  str(round(float(str(table_results[1][2])))) , ' units from the base value.')
-                         st.write('The p-value is ', str(p_value_list[0]), '. The closer to 0, the higher the base value.')
-                         st.write('We are 95 per cent confident that the true value of the intercept falls between ', str(table_results[1][5]), ' and ',  str(table_results[1][6]))
+                         st.write(table_results[1][0], ': This is the value of your control group before the intervention. The base value is', table_results[1][1], '. ')
+                         st.write('The standard error for the intercept is ', table_results[1][2], ' which means the estimated value could vary by approximately ',  table_results[1][2] , ' units from the base value.')
+                         st.write('The p-value is ', p_value_list[0], '. The closer to 0, the higher the base value.')
+                         st.write('We are 95 per cent confident that the true value of the intercept falls between ', table_results[1][5], ' and ',  table_results[1][6])
 
-                         st.write(str(table_results[2][0]), ': The value is the difference between the control group and the target group. The value is ', str(table_results[2][1]))
-                         st.write('The standard error is ', str(table_results[2][2]), ' which means the estimated value could vary by approximately ',  str(round(float(str(table_results[2][2])))) , ' units from the base value.')
-                         st.write('The p-value is ', str(p_value_list[1]), '. The closer to 0, the higher the base value.')
-                         st.write('We are 95 per cent confident that the true value of the intercept falls between ', str(table_results[2][5]), ' and ',  str(table_results[2][6]))
+                         st.write(table_results[2][0], ': The value is the difference between the control group and the target group. The value is ', table_results[2][1])
+                         st.write('The standard error is ', table_results[2][2], ' which means the estimated value could vary by approximately ',  table_results[2][2] , ' units from the base value.')
+                         st.write('The p-value is ', p_value_list[1], '. The closer to 0, the higher the base value.')
+                         st.write('We are 95 per cent confident that the true value of the intercept falls between ', table_results[2][5], ' and ',  table_results[2][6])
 
-                         st.write(str(table_results[3][0]), ': This is the value of the intervention effect or the difference between the value before and after the intervention in the control group. The value is ', str(table_results[3][1]))
-                         st.write('The standard error is ',  str(table_results[3][2]), ' which means the estimated value could vary by approximately ',  str(round(float(str(table_results[3][2])))) , ' units from the base value.')
-                         st.write('The p-value is ', str(p_value_list[2]), '. The closer to 0, the higher the base value.')
-                         st.write('We are 95 per cent confident that the true value of the intercept falls between ', str(table_results[3][5]), ' and ',  str(table_results[3][6]))
+                         st.write(table_results[3][0], ': This is the value of the intervention effect or the difference between the value before and after the intervention in the control group. The value is ', table_results[3][1])
+                         st.write('The standard error is ',  table_results[3][2], ' which means the estimated value could vary by approximately ',  table_results[3][2], ' units from the base value.')
+                         st.write('The p-value is ', p_value_list[2], '. The closer to 0, the higher the base value.')
+                         st.write('We are 95 per cent confident that the true value of the intercept falls between ', table_results[3][5], ' and ',  table_results[3][6])
 
-                         st.write(str(table_results[4][0]), ': The value is the difference between the counterfactual group and the target group after the intervention. The value is ', str(table_results[4][1]))
-                         st.write('The standard error is ', str(table_results[4][2]), ' which means the estimated value could vary by approximately ',  str(round(float(str(table_results[4][2])))) , ' units from the base value.')
-                         st.write('The p-value is ', str(p_value_list[3]), '. The closer to 0, the higher the base value.')
-                         st.write('We are 95 per cent confident that the true value of the intercept falls between ', str(table_results[4][5]), ' and ',  str(table_results[4][6]))
+                         st.write(table_results[4][0], ': The value is the difference between the counterfactual group and the target group after the intervention. The value is ', table_results[4][1])
+                         st.write('The standard error is ', table_results[4][2], ' which means the estimated value could vary by approximately ',  table_results[4][2] , ' units from the base value.')
+                         st.write('The p-value is ', p_value_list[3], '. The closer to 0, the higher the base value.')
+                         st.write('We are 95 per cent confident that the true value of the intercept falls between ', table_results[4][5], ' and ',  table_results[4][6])
 
 
 
@@ -189,7 +192,6 @@ with tab_sample_data:
           st.caption('2. Metric: Numeric / float column with the metric you want to observe. Purchases, Clicks, actions, etc.')
           st.caption('3. Treatment: A boolean column with the followings data values: (0 = No treatment; 1 = Treatment)')
           st.caption('4. Post: A boolean column related with the event date column to indicate the post treatment periods with the followings data values: (0 = Before treatment; 1 = After Treatment)')
-
 
 
 
@@ -254,14 +256,18 @@ with tab_sample_data:
                     control_group_intervention_before = dataframe.query(control_group_intervention_before_string)[metric_name].mean()
 
                     diff_in_diff = (target_group_after-target_group_before)-(control_group_intervention_after-control_group_intervention_before)
-                    summary_data = {'event_data': ['before intervention', 'after intervention'],
+                    own_data_summary_data = {'event_data': ['before intervention', 'after intervention'],
+                                    'control_data': [control_group_intervention_before, control_group_intervention_after],
                                         'target_data': [target_group_before, target_group_after],
-                                        'control_data': [control_group_intervention_before, control_group_intervention_after],
+                                        'counterfactual_data': [target_group_before, target_group_before+(control_group_intervention_after-control_group_intervention_before)]}
+                    summary_data = {'event_data': ['before intervention', 'after intervention'],
+                                    'control_data': [control_group_intervention_before, control_group_intervention_after],
+                                        'target_data': [target_group_before, target_group_after],
                                         'counterfactual_data': [target_group_before, target_group_before+(control_group_intervention_after-control_group_intervention_before)]}
                     df_summary_data = pd.DataFrame(data=summary_data)
                     table_results = smf.ols(model_string, data=dataframe).fit().summary().tables[1]
 
-                    tab1, tab2, tab3 = st.tabs(["Actual Data", "Diff-in-Diff","Regression Model / Explanation"])
+                    tab1, tab2, tab3 = st.tabs(["Actual Data", "Diff-in-Diff Analysis","Regression Model / Explanation"])
 
                     with tab1:
 
@@ -269,17 +275,17 @@ with tab_sample_data:
                          st.plotly_chart(fig, theme="streamlit")
                     with tab2:
                     
-                         x = list(df_summary_data['event_data'])
+                         x = list(df_summary_data['event_data'][0:1])
                          fig = go.Figure()
                          fig.add_trace(go.Scatter(
                          x=x,
-                         y=list(df_summary_data['control_data']),
+                         y=list(df_summary_data['control_data'][0:1]),
                          name = 'Control group', # Style name/legend entry with html tags
                          connectgaps=False # override default to connect the gaps
                ))
                          fig.add_trace(go.Scatter(
                          x=x,
-                         y=list(df_summary_data['target_data']),
+                         y=list(df_summary_data['target_data'][0:1]),
                          name='Target group',
                ))
                          fig.add_trace(go.Scatter(
@@ -289,13 +295,13 @@ with tab_sample_data:
                ))
 
                          st.plotly_chart(fig, theme="streamlit")
-                         st.table(summary_data)
+                         st.table(own_data_summary_data)
                          st.markdown('**Control group**')
                          st.caption("This is the group with no intervention at all, you will use it as for comparing with the target group which will receive the intervention / change planned.")
                          st.markdown('**Target group**')
                          st.caption("This is the group which will get the intervention / change planned, you will use it as for comparing with the control group and check how the metrics change over time.")
                          st.markdown('**Counterfactual group**')
-                         st.caption("This is the group similar to the target group in a scenario when the intervention doesn’t happen at all.")
+                         st.caption("This is a group similar to the target group in a scenario when the intervention doesn’t happen at all.")
 
 
                     with tab3:
@@ -323,31 +329,10 @@ with tab_sample_data:
                          st.write('The standard error is ', table_results[4][2], ' which means the estimated value could vary by approximately ',  round(float(str(table_results[4][2]))) , ' units.')
                          st.write('The p-value is ',p_value_list[3], '. The closer to 0, the higher the base value.')
                          st.write('We are 95 per cent confident that the true value of the intercept falls between ', table_results[4][5], ' and ',  table_results[4][6])
+                    
+                    
 
 
-
-
-with tab_guidance:
-
-     st.markdown('**Difference in differences definition**')
-     st.caption("Difference in differences (you’ll find it as DiD, DD, or Diff-in-Diff as well) is a statistical technique used in econometrics and quantitative research. This will be done as a natural experiment when there’s no possible any randomnization. It calculates the effect of a treatment (i.e., an explanatory variable or an independent as more sunlight exposure to sunflower ) on an outcome (i.e., a response variable or dependent variable as number of seeds) by comparing the average change over time in the outcome variable for the treatment group to the average change over time for the control group. This method may still be subject to certain biases (e.g., mean regression, reverse causality and omitted variable bias).")
-     st.markdown('**Control group**')
-     st.caption("This is the group with no intervention at all, you will use it as for comparing with the target group which will receive the intervention / change planned.")
-     st.markdown('**Target group**')
-     st.caption("This is the group which will get the intervention / change planned, you will use it as for comparing with the control group and check how the metrics change over time.")
-     st.markdown('**Counterfactual group**')
-     st.caption("This is the group similar to the target group in a scenario when the intervention doesn’t happen at all.")
-     st.markdown('**Counterfactual group**')
-     st.caption("This is the group similar to the target group in a scenario when the intervention doesn’t happen at all.")
-     st.markdown('**Counterfactual group**')
-     st.caption("This is the group similar to the target group in a scenario when the intervention doesn’t happen at all.")
-     st.markdown('**Counterfactual group**')
-     st.caption("This is the group similar to the target group in a scenario when the intervention doesn’t happen at all.")
-     st.markdown('**Lineal Regression Model**')
-     st.latex(r'''Y_dt  = β_0 + β_1 TREAT_d + β_2 POST_t + β_3 TREAT_d*POST_t + e_dt  ''')
-     st.caption("Treat variable: This will be your group column.")
-     st.caption("Post variable: This will be your intervention column.")
-     st.caption("Treat*Post variable:This will be the combined effect of the group and intervention column.")
 
 
 
@@ -373,9 +358,7 @@ st.link_button("Streamlit / Snowflake Employee: Antoni Kędracki", "https://www.
 
 
 st.caption('Sterling @ 2024')
-
-
-
+st.caption('Updated: 09/12/24')
 
 
 
