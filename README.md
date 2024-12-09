@@ -1,19 +1,40 @@
-# :earth_americas: GDP dashboard template
+# Differences-in-Differences Analysis Tool
 
-A simple Streamlit app showing the GDP of different countries in the world.
+Tool based on Matheus Facure Alves Causal Inference for the brave and true handbook.
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://gdp-dashboard-template.streamlit.app/)
+This is useful if you can not run an A/B Test
 
-### How to run it on your own machine
+Made by Sterling (https://sterlingdata.webflow.io/)
 
-1. Install the requirements
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://sterling-diff-in-diff-tool.streamlit.app/)
 
-   ```
-   $ pip install -r requirements.txt
-   ```
+### Difference in differences definition
 
-2. Run the app
 
-   ```
-   $ streamlit run streamlit_app.py
-   ```
+Difference in differences (you’ll find it as DiD, DD, or Diff-in-Diff as well) is a statistical technique used in econometrics and quantitative research. This will be done as a natural experiment when there’s no possible any randomnization. It calculates the effect of a treatment (i.e., an explanatory variable or an independent as more sunlight exposure to sunflower ) on an outcome (i.e., a response variable or dependent variable as number of seeds) by comparing the average change over time in the outcome variable for the treatment group to the average change over time for the control group. This method may still be subject to certain biases (e.g., mean regression, reverse causality and omitted variable bias).
+
+Here's you'll find a streamlit app code and an example data file to learn how to use it.
+
+
+
+
+#Need to be descriptive
+
+#List the contents of the repository
+
+#Clearly explains the project to others
+
+#How the project came about
+
+#Motivation
+
+#Limitations
+
+#Challenges
+
+#What problem it hopes to solve
+
+#What the intended use is
+
+
+#Credits
