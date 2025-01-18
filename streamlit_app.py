@@ -11,7 +11,7 @@ st.set_page_config(
     menu_items={
         'Get Help': 'https://www.linkedin.com/in/daviddiasrodriguez/',
         'Report a bug': "https://www.linkedin.com/in/daviddiasrodriguez/",
-        'About': "Made by David Dias Rodríguez. Sterling @ 2024"
+        'About': "Made by David Dias Rodríguez. Sterling @ 2025"
     }
 )
 
@@ -138,7 +138,7 @@ with tab_sample_data:
                          st.markdown('**Target group**')
                          st.caption("This is the group which will get the intervention / change planned, you will use it as for comparing with the control group and check how the metrics change over time.")
                          st.markdown('**Counterfactual group**')
-                         st.caption("This is a group similar to the target group in a scenario when the intervention doesn’t happen at all.")
+                         st.caption("This is a group similar to the target group in a scenario when the intervention doesn’t happen at all, the variation will be similar to the control group.")
 
 
                     with tab_regression_sample_data:
@@ -148,25 +148,26 @@ with tab_sample_data:
                          list_variables = list([str(table_results[1][0]), str(table_results[2][0]), str(table_results[3][0]), str(table_results[4][0])])
                          
                     
-                         st.write(table_results[1][0], ': This is the value of your control group before the intervention. The base value is', table_results[1][1], '. ')
+                         st.write(table_results[1][0], ': This is the metric of your control group before the intervention. The base value is', table_results[1][1])
                          st.write('The standard error for the intercept is ', table_results[1][2], ' which means the estimated value could vary by approximately ',  table_results[1][2] , ' units from the base value.')
-                         st.write('The p-value is ', p_value_list[0], '. The closer to 0, the higher the base value.')
-                         st.write('We are 95 per cent confident that the true value of the intercept falls between ', table_results[1][5], ' and ',  table_results[1][6])
+                         st.write('The p-value is ', p_value_list[0], '. The closer to 0, the higher the metric.')
+                         st.write('We are 95 per cent confident that the true value of the control group metric falls between ', table_results[1][5], ' and ',  table_results[1][6])
 
-                         st.write(table_results[2][0], ': The value is the difference between the control group and the target group. The value is ', table_results[2][1])
+                         
+                         st.write(table_results[2][0], ': The value is the difference between the control group (', round(sample_summary_data_table['control_data'][0], 2) , ') and the target group metric (', round(sample_summary_data_table['target_data'][0], 2), ') . The value is ', table_results[2][1])
                          st.write('The standard error is ', table_results[2][2], ' which means the estimated value could vary by approximately ',  table_results[2][2] , ' units from the base value.')
-                         st.write('The p-value is ', p_value_list[1], '. The closer to 0, the higher the base value.')
-                         st.write('We are 95 per cent confident that the true value of the intercept falls between ', table_results[2][5], ' and ',  table_results[2][6])
+                         st.write('The p-value is ', p_value_list[1], '. The closer to 0, the higher the metric')
+                         st.write('We are 95 per cent confident that the true ', table_results[2][0],  ' value falls between ', table_results[2][5], ' and ',  table_results[2][6])
 
-                         st.write(table_results[3][0], ': This is the value of the intervention effect or the difference between the value before and after the intervention in the control group. The value is ', table_results[3][1])
+                         st.write(table_results[3][0], ': This is the value of the intervention effect or the difference between the metric before (', round(sample_summary_data_table['control_data'][0], 2),') and after the intervention (', round(sample_summary_data_table['control_data'][1], 2),') in the control group. The value is ', table_results[3][1])
                          st.write('The standard error is ',  table_results[3][2], ' which means the estimated value could vary by approximately ',  table_results[3][2], ' units from the base value.')
                          st.write('The p-value is ', p_value_list[2], '. The closer to 0, the higher the base value.')
-                         st.write('We are 95 per cent confident that the true value of the intercept falls between ', table_results[3][5], ' and ',  table_results[3][6])
+                         st.write('We are 95 per cent confident that the true ', table_results[3][0], 'value falls between ', table_results[3][5], ' and ',  table_results[3][6])
 
-                         st.write(table_results[4][0], ': The value is the difference between the counterfactual group and the target group after the intervention. The value is ', table_results[4][1])
+                         st.write(table_results[4][0], ': The value is the difference between the counterfactual group (', round(sample_summary_data_table['counterfactual_data'][1], 2), ') and the target group (', round(sample_summary_data_table['target_data'][1], 2), ') after the intervention. The value is ', table_results[4][1])
                          st.write('The standard error is ', table_results[4][2], ' which means the estimated value could vary by approximately ',  table_results[4][2] , ' units from the base value.')
                          st.write('The p-value is ', p_value_list[3], '. The closer to 0, the higher the base value.')
-                         st.write('We are 95 per cent confident that the true value of the intercept falls between ', table_results[4][5], ' and ',  table_results[4][6])
+                         st.write('We are 95 per cent confident that the true ', table_results[4][0],' value falls between ', table_results[4][5], ' and ',  table_results[4][6])
 
 
 
@@ -256,15 +257,15 @@ with tab_sample_data:
                     control_group_intervention_before = dataframe.query(control_group_intervention_before_string)[metric_name].mean()
 
                     diff_in_diff = (target_group_after-target_group_before)-(control_group_intervention_after-control_group_intervention_before)
-                    own_data_summary_data = {'event_data': ['before intervention', 'after intervention'],
-                                    'control_data': [control_group_intervention_before, control_group_intervention_after],
-                                        'target_data': [target_group_before, target_group_after],
-                                        'counterfactual_data': [target_group_before, target_group_before+(control_group_intervention_after-control_group_intervention_before)]}
+                    sample_summary_data_table = {'event_data': ['before intervention', 'after intervention', 'variation (%)'],
+                                    'control_data': [control_group_intervention_before, control_group_intervention_after, ((control_group_intervention_after-control_group_intervention_before)/control_group_intervention_before)*100],
+                                        'target_data': [target_group_before, target_group_after, ((target_group_after-target_group_before)/target_group_before)*100],
+                                        'counterfactual_data': [target_group_before, target_group_before+(control_group_intervention_after-control_group_intervention_before), (((target_group_before+(control_group_intervention_after-control_group_intervention_before))-target_group_before) / target_group_before)*100]}
                     summary_data = {'event_data': ['before intervention', 'after intervention'],
                                     'control_data': [control_group_intervention_before, control_group_intervention_after],
                                         'target_data': [target_group_before, target_group_after],
                                         'counterfactual_data': [target_group_before, target_group_before+(control_group_intervention_after-control_group_intervention_before)]}
-                    df_summary_data = pd.DataFrame(data=summary_data)
+                    df_summary_data = pd.DataFrame(data=sample_summary_data_table)
                     table_results = smf.ols(model_string, data=dataframe).fit().summary().tables[1]
 
                     tab1, tab2, tab3 = st.tabs(["Actual Data", "Diff-in-Diff Analysis","Regression Model / Explanation"])
@@ -275,17 +276,17 @@ with tab_sample_data:
                          st.plotly_chart(fig, theme="streamlit")
                     with tab2:
                     
-                         x = list(df_summary_data['event_data'][0:1])
+                         x = list(df_summary_data['event_data'][0:2])
                          fig = go.Figure()
                          fig.add_trace(go.Scatter(
                          x=x,
-                         y=list(df_summary_data['control_data'][0:1]),
+                         y=list(df_summary_data['control_data'][0:2]),
                          name = 'Control group', # Style name/legend entry with html tags
                          connectgaps=False # override default to connect the gaps
                ))
                          fig.add_trace(go.Scatter(
                          x=x,
-                         y=list(df_summary_data['target_data'][0:1]),
+                         y=list(df_summary_data['target_data'][0:2]),
                          name='Target group',
                ))
                          fig.add_trace(go.Scatter(
@@ -295,13 +296,13 @@ with tab_sample_data:
                ))
 
                          st.plotly_chart(fig, theme="streamlit")
-                         st.table(own_data_summary_data)
+                         st.table(df_summary_data)
                          st.markdown('**Control group**')
                          st.caption("This is the group with no intervention at all, you will use it as for comparing with the target group which will receive the intervention / change planned.")
                          st.markdown('**Target group**')
                          st.caption("This is the group which will get the intervention / change planned, you will use it as for comparing with the control group and check how the metrics change over time.")
                          st.markdown('**Counterfactual group**')
-                         st.caption("This is a group similar to the target group in a scenario when the intervention doesn’t happen at all.")
+                         st.caption("This is a group similar to the target group in a scenario when the intervention doesn’t happen at all, the variation will be similar to the control group.")
 
 
                     with tab3:
@@ -310,25 +311,26 @@ with tab_sample_data:
                          st.table(table_results)
                          list_variables = list([str(table_results[1][0]), str(table_results[2][0]), str(table_results[3][0]), str(table_results[4][0])])
                          
-                         st.write(table_results[1][0], ': This is the value of your control group before the intervention. The value is', table_results[1][1])
-                         st.write('The standard error for the intercept is ', table_results[1][2], ' which means the estimated value could vary by approximately ',  round(float(str(table_results[1][2]))) , ' units.')
-                         st.write('The p-value is ',p_value_list[0], '. The closer to 0, the higher the base value.')
-                         st.write('We are 95 per cent confident that the true value of the intercept falls between ', table_results[1][5], ' and ',  table_results[1][6])
+                         st.write(table_results[1][0], ': This is the metric of your control group before the intervention. The base value is', table_results[1][1])
+                         st.write('The standard error for the intercept is ', table_results[1][2], ' which means the estimated value could vary by approximately ',  table_results[1][2] , ' units from the base value.')
+                         st.write('The p-value is ', p_value_list[0], '. The closer to 0, the higher the metric.')
+                         st.write('We are 95 per cent confident that the true value of the control group metric falls between ', table_results[1][5], ' and ',  table_results[1][6])
 
-                         st.write(table_results[2][0], ': The value is the difference between the control group and the target group. The value is', table_results[2][1])
-                         st.write('The standard error is ', table_results[2][2], ' which means the estimated value could vary by approximately ',  round(float(str(table_results[2][2]))) , ' units.')
-                         st.write('The p-value is ',p_value_list[1], '. The closer to 0, the higher the base value.')
-                         st.write('We are 95 per cent confident that the true value of the intercept falls between ', table_results[2][5], ' and ',  table_results[2][6])
+                         
+                         st.write(table_results[2][0], ': The value is the difference between the control group (', round(sample_summary_data_table['control_data'][0], 2) , ') and the target group metric (', round(sample_summary_data_table['target_data'][0], 2), ') . The value is ', table_results[2][1])
+                         st.write('The standard error is ', table_results[2][2], ' which means the estimated value could vary by approximately ',  table_results[2][2] , ' units from the base value.')
+                         st.write('The p-value is ', p_value_list[1], '. The closer to 0, the higher the metric')
+                         st.write('We are 95 per cent confident that the true ', table_results[2][0],  ' value falls between ', table_results[2][5], ' and ',  table_results[2][6])
 
-                         st.write(table_results[3][0], ': This is the value of the intervention effect or the difference between the value before and after the intervention in the control group. The value is ', table_results[3][1])
-                         st.write('The standard error is ',  table_results[3][2], ' which means the estimated value could vary by approximately ',  round(float(str(table_results[3][2]))) , ' units.')
-                         st.write('The p-value is ',p_value_list[2], '. The closer to 0, the higher the base value.')
-                         st.write('We are 95 per cent confident that the true value of the intercept falls between ', table_results[3][5], ' and ',  table_results[3][6])
+                         st.write(table_results[3][0], ': This is the value of the intervention effect or the difference between the metric before (', round(sample_summary_data_table['control_data'][0], 2),') and after the intervention (', round(sample_summary_data_table['control_data'][1], 2),') in the control group. The value is ', table_results[3][1])
+                         st.write('The standard error is ',  table_results[3][2], ' which means the estimated value could vary by approximately ',  table_results[3][2], ' units from the base value.')
+                         st.write('The p-value is ', p_value_list[2], '. The closer to 0, the higher the base value.')
+                         st.write('We are 95 per cent confident that the true ', table_results[3][0], 'value falls between ', table_results[3][5], ' and ',  table_results[3][6])
 
-                         st.write(table_results[4][0], ': The value is the difference between the counterfactual group and the target group after the intervention. The value is ', table_results[4][1])
-                         st.write('The standard error is ', table_results[4][2], ' which means the estimated value could vary by approximately ',  round(float(str(table_results[4][2]))) , ' units.')
-                         st.write('The p-value is ',p_value_list[3], '. The closer to 0, the higher the base value.')
-                         st.write('We are 95 per cent confident that the true value of the intercept falls between ', table_results[4][5], ' and ',  table_results[4][6])
+                         st.write(table_results[4][0], ': The value is the difference between the counterfactual group (', round(sample_summary_data_table['counterfactual_data'][1], 2), ') and the target group (', round(sample_summary_data_table['target_data'][1], 2), ') after the intervention. The value is ', table_results[4][1])
+                         st.write('The standard error is ', table_results[4][2], ' which means the estimated value could vary by approximately ',  table_results[4][2] , ' units from the base value.')
+                         st.write('The p-value is ', p_value_list[3], '. The closer to 0, the higher the base value.')
+                         st.write('We are 95 per cent confident that the true ', table_results[4][0],' value falls between ', table_results[4][5], ' and ',  table_results[4][6])
                     
                     
 
@@ -358,7 +360,8 @@ st.link_button("Streamlit / Snowflake Employee: Antoni Kędracki", "https://www.
 
 
 st.caption('Sterling @ 2025')
-st.caption('Updated: 10/01/25')
+st.caption('Updated: 17/01/25')
+
 
 
 
