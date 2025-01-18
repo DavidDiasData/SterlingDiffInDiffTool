@@ -360,8 +360,7 @@ st.link_button("Streamlit / Snowflake Employee: Antoni Kędracki", "https://www.
 
 
 st.caption('Sterling @ 2025')
-st.caption('Updated: 10/01/25')
-
+st.caption('Updated: 17/01/25')
 
 
 
