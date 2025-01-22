@@ -42,4 +42,3 @@ Users can upload their datasets into the application, specify treatment and cont
 Users can upload their datasets into the application, specify treatment and control groups, and define the time periods for analysis. The tool then performs the DiD analysis and presents the results through tables and visualizations, aiding in the interpretation of the treatment effect.
 
 
-#Credits
