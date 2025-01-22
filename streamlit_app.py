@@ -343,7 +343,7 @@ with tab_sample_data:
 st.subheader("Collaboration and contact links", divider="gray")
 
 st.caption("Do you wanna contribute to this project?")
-st.link_button("Donate", "https://donate.stripe.com/5kAbLQ0Nk1v85nqfZ0")
+st.link_button("Donate", "https://donate.stripe.com/6oEaFe4TeegDcF25kl")
 
 
 st.caption("Do you need an experimentation program?")
@@ -360,7 +360,8 @@ st.link_button("Streamlit / Snowflake Employee: Antoni Kędracki", "https://www.
 
 
 st.caption('Sterling @ 2025')
-st.caption('Updated: 17/01/25')
+st.caption('Updated: 10/01/25')
+
 
 
 
