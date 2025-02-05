@@ -357,10 +357,19 @@ st.link_button("Mastering 'Metrics: The Path from Cause to Effect", "https://www
 st.link_button("OLS Summary: P-values and Confidence Intervals", "https://albertum.medium.com/ols-summary-p-values-and-confidence-intervals-abd4e3e968cd")
 st.link_button("Streamlit / Snowflake Employee: Jakub Kmiotek", "https://www.linkedin.com/in/jakub-kmiotek-18070897/")
 st.link_button("Streamlit / Snowflake Employee: Antoni Kędracki", "https://www.linkedin.com/in/akedracki/")
+st.link_button("Pedro H. C. Sant'Anna - Difference-in-Differences: A brief guide to practice", "https://psantanna.com/DiD/Instacart_202409.pdf")
+st.link_button("Card & Krueger (1994) - The classic DiD study on minimum wage and employment", "https://www.jstor.org/stable/2677856")
+st.link_button("Callaway & Sant'Anna (2021) -  Advances in DiD methods for staggered adoption", "https://www.sciencedirect.com/science/article/abs/pii/S0304407620303948")
+st.link_button("goodman-bacon 2021 - decomposing DiD estimates in multi-period settings", "https://www.sciencedirect.com/science/article/abs/pii/S0304407621001445")
+
+
+st.header('Python Packages for DiD Analysis', divider='gray')
+st.link_button("Differences", "https://github.com/bernardodionisi/differences")
+st.link_button("Causal Impact", "https://github.com/google/tfp-causalimpact")
 
 
 st.caption('Sterling @ 2025')
-st.caption('Updated: 10/01/25')
+st.caption('Updated: 05/02/25')
 
 
 
