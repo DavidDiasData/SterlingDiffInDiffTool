@@ -104,7 +104,7 @@ with tab_sample_data:
                     df_summary_data = pd.DataFrame(data=summary_data)
                     table_results = smf.ols(model_string, data=dataframe).fit().summary().tables[1]
 
-                    tab_actual_data_sample_data, tab_diff_data_sample_data, tab_regression_sample_data = st.tabs(["Actual Data", "Diff-in-Diff Analysis","Regression Model / Explanation"])
+                    tab_actual_data_sample_data, tab_diff_data_sample_data, tab_regression_sample_data = st.tabs(["Current Data", "Diff-in-Diff Analysis","Regression Model / Explanation"])
 
                     with tab_actual_data_sample_data:
 
@@ -268,7 +268,7 @@ with tab_sample_data:
                     df_summary_data = pd.DataFrame(data=sample_summary_data_table)
                     table_results = smf.ols(model_string, data=dataframe).fit().summary().tables[1]
 
-                    tab1, tab2, tab3 = st.tabs(["Actual Data", "Diff-in-Diff Analysis","Regression Model / Explanation"])
+                    tab1, tab2, tab3 = st.tabs(["Current Data", "Diff-in-Diff Analysis","Regression Model / Explanation"])
 
                     with tab1:
 
