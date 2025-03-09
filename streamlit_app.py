@@ -18,6 +18,28 @@ st.set_page_config(
 # -----------------------------------------------------------------------------
 # Draw the actual page
 
+st.markdown(
+    """
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KJ6PJG6X');</script>
+<!-- End Google Tag Manager -->
+    """, unsafe_allow_html=True)
+
+
+st.markdown(
+    """
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KJ6PJG6X"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+</script>
+    """, unsafe_allow_html=True)
+
+
 # Set the title that appears at the top of the page.
 st.header('Difference-in-Differences Analysis Tool', divider='gray')
 
@@ -367,6 +389,7 @@ st.link_button("Pedro H. C. Sant'Anna - Difference-in-Differences: A brief guide
 st.link_button("Card & Krueger (1994) - The classic DiD study on minimum wage and employment", "https://www.jstor.org/stable/2677856")
 st.link_button("Callaway & Sant'Anna (2021) -  Advances in DiD methods for staggered adoption", "https://www.sciencedirect.com/science/article/abs/pii/S0304407620303948")
 st.link_button("goodman-bacon 2021 - decomposing DiD estimates in multi-period settings", "https://www.sciencedirect.com/science/article/abs/pii/S0304407621001445")
+
 st.link_button("Blockchain ETL for crypto currency analysis", "https://github.com/blockchain-etl/bitcoin-etl")
 st.link_button("Aryma Labs - Proving Efficacy of Marketing Mix Model through the Difference in Difference (DID) Technique", "https://www.techrxiv.org/users/778033/articles/912681-proving-efficacy-of-marketing-mix-modeling-mmm-through-the-difference-in-difference-did-technique")
 st.link_button("Meridian - The lastest Marketing Mix Modelling Framework", "https://github.com/google/meridian")
@@ -379,9 +402,9 @@ st.link_button("Differences", "https://github.com/bernardodionisi/differences")
 st.link_button("Causal Impact", "https://github.com/google/tfp-causalimpact")
 
 
-
 st.caption('Sterling @ 2025')
 st.caption('Updated: 09/02/25')
+
 
 
 st.markdown(
