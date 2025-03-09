@@ -1,6 +1,6 @@
 # Differences-in-Differences Analysis Tool
 
-Tool based on Matheus Facure Alves Causal Inference for the brave and true handbook.
+Tool based on Matheus Facure Alves Causal Inference for the brave and true handbook. (https://matheusfacure.github.io/python-causality-handbook/13-Difference-in-Differences.html)
 
 This is useful if you can not run an A/B Test
 
