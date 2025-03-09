@@ -405,6 +405,8 @@ st.link_button("Causal Impact", "https://github.com/google/tfp-causalimpact")
 st.caption('Sterling @ 2025')
 st.caption('Updated: 09/02/25')
 
+
+
 st.markdown(
     """
 <!-- Google tag (gtag.js) -->
@@ -413,11 +415,9 @@ st.markdown(
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-Q1JZHKMZE0');
 </script>
     """, unsafe_allow_html=True)
-
 
 
 
