@@ -33,8 +33,13 @@ tab_sample_data, tab_own_analysis = st.tabs(["Sample Data", "Build Your Own Anal
 
 with tab_sample_data:
      st.markdown('**Learn how to use this app from sample data**')
-     dataframe = pd.read_csv("Causal inference - diff-in-diff - Raw Data - Example (Sterling example).csv")
+     st.image("/workspaces/SterlingDiffInDiffTool/sterling_diff-in-diff-tool-sharp-causality-week-1.jpg", caption='Real world examples. Just one metric per case study.')
 
+     list_examples = ["Causal inference - diff-in-diff - Raw Data - Example (Sterling example).csv","Diff-In-Diff Examples v1.1 - Dogecoin vs Bitcoin - Transactions.csv", "Diff-In-Diff Examples v1.1 - Diff-in-Diff- Dogecoin vs litecoin.csv", "Diff-In-Diff Examples v1.1 - Diff-in-Diff- Dogecoin vs Ethereum.csv","Diff-In-Diff Examples v1.1 - India vs China - Fertility rate.csv", "Diff-In-Diff Examples v1.1 - Aryma Labs - Market A vs Market B - MMM.csv"  ]
+     sample_data_examples = st.selectbox(
+               "Select the data example",
+               (list_examples), index=0, key='sample_data_examples')
+     dataframe = pd.read_csv(sample_data_examples)
      data_as_csv= dataframe.to_csv(index=False).encode("utf-8")
 
 
@@ -44,6 +49,7 @@ with tab_sample_data:
      file_name="diff-in-diff-sample-data.csv",
      mime="text/csv"
      )
+
 
 
      col1, col2 = st.columns(2)
@@ -217,7 +223,7 @@ with tab_sample_data:
                col1, col2 = st.columns(2)
                with col1:
                     st.write("Take a look of your data")
-                    st.write(dataframe.head(10))
+                    st.write(dataframe)
 
 
                with col2:
@@ -363,15 +369,34 @@ st.link_button("Callaway & Sant'Anna (2021) -  Advances in DiD methods for stagg
 st.link_button("goodman-bacon 2021 - decomposing DiD estimates in multi-period settings", "https://www.sciencedirect.com/science/article/abs/pii/S0304407621001445")
 
 
+st.link_button("Blockchain ETL for crypto currency analysis", "https://github.com/blockchain-etl/bitcoin-etl")
+st.link_button("Aryma Labs - Proving Efficacy of Marketing Mix Model through the Difference in Difference (DID) Technique", "https://www.techrxiv.org/users/778033/articles/912681-proving-efficacy-of-marketing-mix-modeling-mmm-through-the-difference-in-difference-did-technique")
+st.link_button("Meridian - The lastest Marketing Mix Modelling Framework", "https://github.com/google/meridian")
+st.link_button("Fertility rate, total (births per woman) per country", "https://api.worldbank.org/v2/en/indicator/SP.DYN.TFRT.IN?downloadformat=csv")
+
+
+
+
 st.header('Python Packages for DiD Analysis', divider='gray')
 st.link_button("Differences", "https://github.com/bernardodionisi/differences")
 st.link_button("Causal Impact", "https://github.com/google/tfp-causalimpact")
 
 
 st.caption('Sterling @ 2025')
-st.caption('Updated: 05/02/25')
+st.caption('Updated: 08/02/25')
 
 
+st.markdown(
+    """
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q1JZHKMZE0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Q1JZHKMZE0');
+</script>
+    """, unsafe_allow_html=True)
 
 
 
