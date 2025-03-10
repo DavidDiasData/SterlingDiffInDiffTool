@@ -402,6 +402,7 @@ st.link_button("Differences", "https://github.com/bernardodionisi/differences")
 st.link_button("Causal Impact", "https://github.com/google/tfp-causalimpact")
 
 
+
 st.caption('Sterling @ 2025')
 st.caption('Updated: 10/02/25')
 
@@ -423,10 +424,6 @@ st.markdown(
 st.markdown(
     """
 <meta name="google-adsense-account" content="ca-pub-3205613061121767">    """, unsafe_allow_html=True)
-
-
-
-
 
 
 
