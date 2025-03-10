@@ -425,10 +425,3 @@ st.markdown(
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3205613061121767"
      crossorigin="anonymous"></script>
     """, unsafe_allow_html=True)
-
-
-
-
-
-
-
