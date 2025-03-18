@@ -8,6 +8,17 @@ Made by Sterling (https://sterlingdata.webflow.io/)
 
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://sterling-diff-in-diff-tool.streamlit.app/)
 
+
+
+### V1.1 Live
+
+You will find new examples about how to use Diff-in-Diff. 
+
+- Elon Musk Effect
+- China's birth control policies
+- Aryma Labs - Marketing Mix Modelling
+
+
 ### Difference in differences definition
 
 
