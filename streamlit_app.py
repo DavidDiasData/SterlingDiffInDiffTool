@@ -45,6 +45,7 @@ with tab_sample_data:
                "Select the data example",
                (list_examples), index=0, key='sample_data_examples')
      dataframe = pd.read_csv(sample_data_examples + csv_file_format)
+
      data_as_csv= dataframe.to_csv(index=False).encode("utf-8")
 
 
@@ -55,8 +56,6 @@ with tab_sample_data:
      mime="text/csv"
      )
 
-
- 
 
 
 
@@ -379,6 +378,7 @@ st.link_button("Card & Krueger (1994) - The classic DiD study on minimum wage an
 st.link_button("Callaway & Sant'Anna (2021) -  Advances in DiD methods for staggered adoption", "https://www.sciencedirect.com/science/article/abs/pii/S0304407620303948")
 st.link_button("goodman-bacon 2021 - decomposing DiD estimates in multi-period settings", "https://www.sciencedirect.com/science/article/abs/pii/S0304407621001445")
 
+
 st.link_button("Blockchain ETL for crypto currency analysis", "https://github.com/blockchain-etl/bitcoin-etl")
 st.link_button("Aryma Labs - Proving Efficacy of Marketing Mix Model through the Difference in Difference (DID) Technique", "https://www.techrxiv.org/users/778033/articles/912681-proving-efficacy-of-marketing-mix-modeling-mmm-through-the-difference-in-difference-did-technique")
 st.link_button("Meridian - The lastest Marketing Mix Modelling Framework", "https://github.com/google/meridian")
@@ -393,4 +393,6 @@ st.link_button("Causal Impact", "https://github.com/google/tfp-causalimpact")
 
 st.caption('Sterling @ 2025')
 st.caption('Updated: 10/02/25')
+
+
 
