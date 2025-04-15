@@ -40,6 +40,7 @@ with tab_sample_data:
 
      csv_file_format = ".csv"
 
+
      list_examples = ["Causal inference - diff-in-diff - Raw Data - Example (Sterling example)","Diff-In-Diff Examples v1.1 - Dogecoin vs Bitcoin - Transactions", "Diff-In-Diff Examples v1.1 - Diff-in-Diff- Dogecoin vs litecoin", "Diff-In-Diff Examples v1.1 - Diff-in-Diff- Dogecoin vs Ethereum","Diff-In-Diff Examples v1.1 - India vs China - Fertility rate", "Diff-In-Diff Examples v1.1 - Aryma Labs - Market A vs Market B - MMM"  ]
      sample_data_examples = st.selectbox(
                "Select the data example",
@@ -56,7 +57,6 @@ with tab_sample_data:
      )
 
 
- 
 
 
 
@@ -379,6 +379,7 @@ st.link_button("Card & Krueger (1994) - The classic DiD study on minimum wage an
 st.link_button("Callaway & Sant'Anna (2021) -  Advances in DiD methods for staggered adoption", "https://www.sciencedirect.com/science/article/abs/pii/S0304407620303948")
 st.link_button("goodman-bacon 2021 - decomposing DiD estimates in multi-period settings", "https://www.sciencedirect.com/science/article/abs/pii/S0304407621001445")
 
+
 st.link_button("Blockchain ETL for crypto currency analysis", "https://github.com/blockchain-etl/bitcoin-etl")
 st.link_button("Aryma Labs - Proving Efficacy of Marketing Mix Model through the Difference in Difference (DID) Technique", "https://www.techrxiv.org/users/778033/articles/912681-proving-efficacy-of-marketing-mix-modeling-mmm-through-the-difference-in-difference-did-technique")
 st.link_button("Meridian - The lastest Marketing Mix Modelling Framework", "https://github.com/google/meridian")
@@ -386,9 +387,11 @@ st.link_button("Fertility rate, total (births per woman) per country", "https://
 
 
 
+
 st.header('Python Packages for DiD Analysis', divider='gray')
 st.link_button("Differences", "https://github.com/bernardodionisi/differences")
 st.link_button("Causal Impact", "https://github.com/google/tfp-causalimpact")
+
 
 
 st.caption('Sterling @ 2025')
