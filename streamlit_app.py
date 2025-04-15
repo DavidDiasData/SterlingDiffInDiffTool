@@ -40,12 +40,12 @@ with tab_sample_data:
 
      csv_file_format = ".csv"
 
+
      list_examples = ["Causal inference - diff-in-diff - Raw Data - Example (Sterling example)","Diff-In-Diff Examples v1.1 - Dogecoin vs Bitcoin - Transactions", "Diff-In-Diff Examples v1.1 - Diff-in-Diff- Dogecoin vs litecoin", "Diff-In-Diff Examples v1.1 - Diff-in-Diff- Dogecoin vs Ethereum","Diff-In-Diff Examples v1.1 - India vs China - Fertility rate", "Diff-In-Diff Examples v1.1 - Aryma Labs - Market A vs Market B - MMM"  ]
      sample_data_examples = st.selectbox(
                "Select the data example",
                (list_examples), index=0, key='sample_data_examples')
      dataframe = pd.read_csv(sample_data_examples + csv_file_format)
-
      data_as_csv= dataframe.to_csv(index=False).encode("utf-8")
 
 
@@ -55,6 +55,7 @@ with tab_sample_data:
      file_name="diff-in-diff-sample-data.csv",
      mime="text/csv"
      )
+
 
 
 
@@ -386,13 +387,13 @@ st.link_button("Fertility rate, total (births per woman) per country", "https://
 
 
 
+
 st.header('Python Packages for DiD Analysis', divider='gray')
 st.link_button("Differences", "https://github.com/bernardodionisi/differences")
 st.link_button("Causal Impact", "https://github.com/google/tfp-causalimpact")
 
 
+
 st.caption('Sterling @ 2025')
-st.caption('Updated: 10/02/25')
-
-
+st.caption('Updated: 15/04/25')
 
