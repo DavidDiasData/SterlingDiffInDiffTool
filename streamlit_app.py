@@ -392,5 +392,5 @@ st.link_button("Causal Impact", "https://github.com/google/tfp-causalimpact")
 
 
 st.caption('Sterling @ 2025')
-st.caption('Updated: 15/04/25')
+st.caption('Updated: 02/06/25')
 
