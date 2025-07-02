@@ -2,3 +2,4 @@ streamlit>=1.26.0
 pandas
 plotly>=5.22.0
 statsmodels
+scipy<=1.15.3
