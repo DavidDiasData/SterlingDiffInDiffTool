@@ -4,7 +4,7 @@ Tool based on Matheus Facure Alves Causal Inference for the brave and true handb
 
 This is useful if you can not run an A/B Test
 
-Made by Sterling (https://sterlingdata.webflow.io/)
+Made by Sterling (https://sterlingdata.webflow.io/) / David Dias Rodríguez (https://www.linkedin.com/in/daviddiasrodriguez/)
 
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://sterling-diff-in-diff-tools.streamlit.app/)
 
