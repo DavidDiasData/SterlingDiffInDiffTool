@@ -6,7 +6,7 @@ This is useful if you can not run an A/B Test
 
 Made by Sterling (https://sterlingdata.webflow.io/)
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://sterling-diff-in-diff-tool.streamlit.app/)
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://sterling-diff-in-diff-tools.streamlit.app/)
 
 
 
